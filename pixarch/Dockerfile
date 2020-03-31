@@ -15,6 +15,11 @@ RUN pacman -S sudo --noconfirm
 RUN pacman -S git --noconfirm
 RUN pacman -S openssh --noconfirm
 
+# config ssh service
+RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+RUN /usr/sbin/sshd
+
 # 添加用户
 RUN useradd -m -s /bin/bash pix  
 RUN usermod -a -G wheel pix
